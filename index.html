@@ -21,11 +21,13 @@
   /* ===== MANDÍBULA SUPERIOR ===== */
   .mandibulasuperior{
     position:fixed;
-    top:-120px;       /* Mueve la imagen hacia abajo o arriba */
+    top:0px;       /* Mueve la imagen hacia abajo o arriba */
     left:0;
     width:100vw;    /* Ancho completo */
     height:230px;   /* Alto que tú elegiste */
     object-fit:cover;/* ESTIRA la imagen */
+    object-position: bottom center;
+     transform:translateY(-60px);
     z-index:1;
     pointer-events:none;
   }
