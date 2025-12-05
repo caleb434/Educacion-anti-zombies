@@ -18,20 +18,19 @@
     z-index:0;
   }
 
-  /* ===== MANDÍBULA SUPERIOR =====
-     Solo queremos ver la parte de ABAJO de la imagen
-     (verde + dientes), no los ojos.
-  */
+  /* ===== MANDÍBULA SUPERIOR ===== */
   .mandibulasuperior{
     position:fixed;
-    top:0;                    /* pegada arriba */
-    left:5;
-    width:100vw;              /* ocupa todo el ancho */
-    height:22vh;              /* altura de la franja visible (ajustable) */
-    object-fit:cover;         /* rellena el rectángulo sin deformar */
-    object-position:bottom center; /* usa la parte de ABAJO: los dientes */
+    top:0;
+    left:0;          /* <- antes estaba en 5px; causaba el hueco */
+    right:0;         /* asegura ocupar todo el ancho */
+    width:100vw;
+    height:22vh;
+    object-fit:cover;
+    object-position:bottom center;
     z-index:1;
     pointer-events:none;
+    display:block;   /* por si algún navegador trata <img> como inline */
   }
 </style>
 
