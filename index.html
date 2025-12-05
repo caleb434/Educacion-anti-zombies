@@ -12,22 +12,22 @@
   }
 
   /* ===== IMAGEN DE FONDO (GARGANTA) ===== */
-  .Garganta{
+  .garganta{
     position:fixed;    /* Se queda fija en la pantalla */
     inset:0;           /* La pega a todos los bordes */
     background:center/cover no-repeat url("assets/images/garganta.png");
   }
 
   /* ===== MANDÍBULA SUPERIOR ===== */
-  .Mandíbula superior{
-    position:fixed;           /* Se queda fija en la pantalla */
-    inset:0;                  /* Centra el elemento */
-    margin:auto;              /* Ayuda a centrarlo */
-    transform:translateY(-50px); /* SUBE la imagen */
-    width:min(100vw,1300px);  /* La hace más grande */
-    height:auto;              /* Mantiene proporción */
-    z-index:1;                /* La pone encima del fondo */
-    pointer-events:none;      /* Evita que interfiera con clics */
+  .mandibulasuperior{
+    position:fixed;
+    top:50px;       /* Mueve la imagen hacia abajo o arriba */
+    left:0;
+    width:100vw;    /* Ancho completo */
+    height:200px;   /* Alto que tú elegiste */
+    object-fit:fill;/* ESTIRA la imagen */
+    z-index:1;
+    pointer-events:none;
   }
 
 </style>
