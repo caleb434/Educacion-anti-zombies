@@ -5,8 +5,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Garganta a pantalla completa</title>
+    <style>
+      /* Por qué: background en body evita reflow de <img> */
+      html, body { height: 100%; margin: 0; }
+      body {
+        background: #000 url('assets/images/garganta.png') center/cover no-repeat;
+      }
+      /* Centrado absoluto y responsivo */
+      #mandibula {
+        position: fixed;       /* Por qué: permanece centrada al hacer scroll/redimensionar */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: min(90vw, 900px);
+        max-height: 80vh;
+        width: auto;
+        height: auto;
+        z-index: 10;           /* Por qué: asegurar que quede encima del fondo */
+        image-rendering: auto;
+        pointer-events: none;  /* Por qué: no interceptar clics si no es interactiva */
+      }
+    </style>
   </head>
-  <body style="margin:0;height:100vh;background:#000 url('assets/images/garganta.png') center/cover no-repeat">
-    <!-- Por qué: usar background reduce DOM y evita reflow de <img> -->
+  <body>
+    <img
+      id="mandibula"
+      src="assets/images/mandibula superior.png"
+      alt="Mandíbula superior"
+    />
   </body>
 </html>
