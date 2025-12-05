@@ -1,44 +1,12 @@
-<!-- /index.html -->
+<!-- File: /index.html -->
 <!doctype html>
 <html lang="es">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Garganta + Mandíbula</title>
-  <style>
-    :root{
-      --scaleX: 1.08;   /* >1 = más ancha hasta los bordes */
-      --offsetY: -5vh;  /* negativo = subir */
-      --offsetX: 0vw;   /* + hacia la derecha, - hacia la izquierda */
-    }
-
-    html,body{margin:0}
-    body{
-      min-height:100vh;      /* fallback */
-      min-height:100svh;
-      height:100dvh;
-      background:#000 url('assets/images/garganta.png') center/cover no-repeat;
-    }
-
-    .mandibula{
-      position:fixed;
-      left:50%;
-      top:calc(50% + var(--offsetY));
-      /* Centro exacto + ajuste fino horizontal + ancho extra sin recorte */
-      transform:
-        translate(-50%,-50%)
-        translateX(var(--offsetX))
-        scaleX(var(--scaleX));
-      transform-origin:center;
-      width:100vw;           /* base: ocupa el ancho de la ventana */
-      height:auto;
-      z-index:10;
-      pointer-events:none;
-      display:block;
-    }
-  </style>
-  <body>
-    <img class="mandibula"
-         src="assets/images/mandibula%20superior.png"
-         alt="Mandíbula superior" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Garganta a pantalla completa</title>
+  </head>
+  <body style="margin:0;height:100vh;background:#000 url('assets/images/garganta.png') center/cover no-repeat">
+    <!-- Por qué: usar background reduce DOM y evita reflow de <img> -->
   </body>
 </html>
