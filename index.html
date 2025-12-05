@@ -3,34 +3,42 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
 <style>
+  /* ===== CONFIGURACIÓN GENERAL ===== */
   html,body{
     margin:0;
     height:100%;
     overflow:hidden;
   }
 
-  /* Fondo */
+  /* ===== FONDO: GARGANTA (ROJO) ===== */
   .garganta{
     position:fixed;
     inset:0;
     background:center/cover no-repeat url("assets/images/garganta.png");
+    z-index:0;
   }
 
-  /* Mandíbula superior */
+  /* ===== MANDÍBULA SUPERIOR =====
+     Solo queremos ver la parte de ABAJO de la imagen
+     (verde + dientes), no los ojos.
+  */
   .mandibulasuperior{
     position:fixed;
-    left:50%;              /* Centramos */
-    transform:translateX(-50%); /* Asegura centrado exacto */
-    width:140vw;           /* Más grande que la pantalla para que cubra todo */
-    height:auto;
-    top:-260px;            /* SUBE la mandíbula (ajusta este valor) */
+    top:0;                    /* pegada arriba */
+    left:0;
+    width:100vw;              /* ocupa todo el ancho */
+    height:22vh;              /* altura de la franja visible (ajustable) */
+    object-fit:cover;         /* rellena el rectángulo sin deformar */
+    object-position:bottom center; /* usa la parte de ABAJO: los dientes */
     z-index:1;
     pointer-events:none;
   }
 </style>
 
+<!-- FONDO: GARGANTA -->
 <div class="garganta"></div>
 
+<!-- MANDÍBULA SUPERIOR -->
 <img class="mandibulasuperior"
      src="assets/images/mandibula superior.png"
      alt="">
