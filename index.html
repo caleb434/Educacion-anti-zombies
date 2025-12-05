@@ -1,37 +1,9 @@
 <!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-      }
-      body {
-        min-height: 100vh;
-        background-image: url("assets/images/garganta.png");
-        background-size: cover;      /* cubre toda la pantalla */
-        background-position: center; /* centrado visual */
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* sensación de full-bleed; quítalo si no lo quieres */
-        overflow: hidden;            /* evita scroll por subpíxeles */
-      }
-      /* Opcional: texto centrado por si quieres overlay */
-      .overlay {
-        position: fixed;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        font: 600 2rem/1.2 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-        color: white;
-        text-shadow: 0 2px 12px rgba(0,0,0,.5);
-        pointer-events: none; /* no bloquea clics del fondo */
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Puedes borrar este overlay si no lo necesitas -->
-    <div class="overlay">Garganta a pantalla completa</div>
-  </body>
-</html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fondo Fijo</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+  .bg{position:fixed;inset:0;background:center/cover no-repeat url('/mnt/data/246616ae-b5a8-4faf-a31e-038e69a466b1.png');transform:translateZ(0)}
+</style>
+<div class="bg"></div>
