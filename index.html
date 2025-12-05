@@ -1,5 +1,4 @@
 <!doctype html>
-<html lang="es">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
@@ -11,7 +10,7 @@
     overflow:hidden;
   }
 
-  /* ===== FONDO: GARGANTA ===== */
+  /* ===== FONDO: GARGANTA (ROJO) ===== */
   .garganta{
     position:fixed;
     inset:0;
@@ -19,36 +18,27 @@
     z-index:0;
   }
 
-  /* ===== WRAPPER QUE RECORTA LA MANDÍBULA ===== */
-  .mandibula-wrapper{
+  /* ===== MANDÍBULA SUPERIOR =====
+     Solo queremos ver la parte de ABAJO de la imagen
+     (verde + dientes), no los ojos.
+  */
+  .mandibulasuperior{
     position:fixed;
-    top:0;
+    top:0;                    /* pegada arriba */
     left:0;
-    width:100vw;        /* ocupa todo el ancho */
-    height:22vh;        /* zona visible de la mandíbula */
-    overflow:hidden;    /* recorta la parte superior */
+    width:100vw;              /* ocupa todo el ancho */
+    height:22vh;              /* altura de la franja visible (ajustable) */
+    object-fit:cover;         /* rellena el rectángulo sin deformar */
+    object-position:bottom center; /* usa la parte de ABAJO: los dientes */
     z-index:1;
     pointer-events:none;
   }
-
-  /* ===== IMAGEN DE LA MANDÍBULA ===== */
-  .mandibulasuperior{
-    width:100%;         /* ahora sí cubre TODO el ancho */
-    height:auto;        /* respeta proporción de la imagen */
-    position:absolute;
-    bottom:0;           /* asegura que se vea la parte de los dientes */
-  }
 </style>
 
-<body>
+<!-- FONDO: GARGANTA -->
+<div class="garganta"></div>
 
-  <!-- FONDO GARGANTA -->
-  <div class="garganta"></div>
-
-  <!-- MANDÍBULA SUPERIOR (RECORTADA CORRECTAMENTE) -->
-  <div class="mandibula-wrapper">
-    <img class="mandibulasuperior" src="assets/images/mandibula superior.png" alt="">
-  </div>
-
-</body>
-</html>
+<!-- MANDÍBULA SUPERIOR -->
+<img class="mandibulasuperior"
+     src="assets/images/mandibula superior.png"
+     alt="">
