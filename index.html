@@ -6,14 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Educación anti zombies</title>
 
-    <!-- Favicon / Logo (SVG + fallbacks PNG). 
-         ⚠️ Para verse más “grande”, usa archivos sin padding. 
-         Sube si puedes: assets/images/logo-48.png y logo-32.png y logo-16.png -->
-    <link rel="icon" href="assets/images/logo.svg?v=4" type="image/svg+xml" sizes="any">
-    <link rel="icon" href="assets/images/logo-48.png?v=4" type="image/png" sizes="48x48">
-    <link rel="icon" href="assets/images/logo-32.png?v=4" type="image/png" sizes="32x32">
-    <link rel="icon" href="assets/images/logo-16.png?v=4" type="image/png" sizes="16x16">
-    <link rel="shortcut icon" href="assets/images/logo-32.png?v=4" type="image/png">
+    <!-- Favicon / Logo (SVG + fallbacks PNG). Rutas relativas para GitHub Pages. -->
+    <link rel="icon" href="./assets/images/logo.svg?v=3" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="./assets/images/ojos.png?v=3" type="image/png" sizes="32x32">
+    <link rel="icon" href="./assets/images/ojos.png?v=3" type="image/png" sizes="16x16">
     <meta name="theme-color" content="#111111" />
 
     <!-- Preloads -->
@@ -47,7 +43,7 @@
 
       .overlay-image{
         position: fixed;
-        pointer-events: none; /* no bloquea la UI */
+        pointer-events: none; /* por qué: no bloquea la UI */
         image-rendering: auto;
       }
 
