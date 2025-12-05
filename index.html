@@ -1,65 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Juego Zombie</title>
-<style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;      /* evita scroll */
-        background: black;     /* color de fondo por si carga lento */
+<!-- File: index.html -->
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Garganta a Pantalla Completa</title>
+    <style>
+      /* Por qué: Garantiza que el fondo cubra siempre toda la pantalla sin scroll */
+      html, body {
         height: 100%;
-    }
-</style>
-</head>
-<body>
-
-<!-- PIXI.js cdn -->
-<script src="https://pixijs.download/release/pixi.min.js"></script>
-
-<script>
-    // Crear aplicación PIXI a pantalla completa
-    const app = new PIXI.Application({
-        resizeTo: window,         // Se ajusta automáticamente al tamaño de la ventana
-        backgroundColor: 0x000000,
-        antialias: true
-    });
-
-    // Agregar el canvas al body
-    document.body.appendChild(app.view);
-
-    // Cargar la imagen
-    PIXI.Assets.load("assets/images/garganta.png").then(() => {
-        const fondo = PIXI.Sprite.from("assets/images/garganta.png");
-
-        fondo.anchor.set(0.5);    // Centrar origen
-        app.stage.addChild(fondo);
-
-        // Función para escalar el fondo a pantalla completa
-        function resizeBackground() {
-            const ratio = fondo.texture.width / fondo.texture.height;
-            const winRatio = window.innerWidth / window.innerHeight;
-
-            // Si la pantalla es más ancha → ajustar ancho
-            if (winRatio > ratio) {
-                fondo.width = window.innerWidth;
-                fondo.height = window.innerWidth / ratio;
-            } 
-            // Si la pantalla es más alta → ajustar alto
-            else {
-                fondo.height = window.innerHeight;
-                fondo.width = window.innerHeight * ratio;
-            }
-
-            fondo.x = window.innerWidth / 2;
-            fondo.y = window.innerHeight / 2;
-        }
-
-        resizeBackground();
-        window.addEventListener("resize", resizeBackground);
-    });
-</script>
-
-</body>
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        background-image: url("assets/images/garganta.png");
+        background-size: cover;      /* cubre toda la pantalla */
+        background-position: center; /* centrado visual */
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* sensación de full-bleed; quítalo si no lo quieres */
+        overflow: hidden;            /* evita scroll por subpíxeles */
+      }
+      /* Opcional: texto centrado por si quieres overlay */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font: 600 2rem/1.2 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        color: white;
+        text-shadow: 0 2px 12px rgba(0,0,0,.5);
+        pointer-events: none; /* no bloquea clics del fondo */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Puedes borrar este overlay si no lo necesitas -->
+    <div class="overlay">Garganta a pantalla completa</div>
+  </body>
 </html>
