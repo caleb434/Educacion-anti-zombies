@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mordida Zombie</title>
 
+    <script src="https://pixijs.download/release/pixi.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #111;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+// ---------------------------
+// 1. Crear aplicación PIXI
+// ---------------------------
+const app = new PIXI.Application({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    backgroundColor: 0x111111,
+    antialias: true
+});
+
+document.body.appendChild(app.view);
+
+// ---------------------------
+// 2. Cargar imágenes
+// ---------------------------
+PIXI.Assets.load([
+    "assets/images/mandibula superior.png",
+    "assets/images/mandibula inferior.png"
+]).then(() => {
+
+    // Crear sprites
+    const sup = PIXI.Sprite.from("assets/images/mandibula superior.png");
+    const inf = PIXI.Sprite.from("assets/images/mandibula inferior.png");
+
+    // ---------------------------
+    // 3. Ajustar posición
+    // ---------------------------
+
+    sup.anchor.set(0.5, 1); // centro abajo
+    inf.anchor.set(0.5, 0); // centro arriba
+
+    sup.x = app.renderer.width / 2;
+    inf.x = app.renderer.width / 2;
+
+    sup.y = app.renderer.height / 2 - 50; 
+    inf.y = app.renderer.height / 2 + 50;
+
+    app.stage.addChild(sup);
+    app.stage.addChild(inf);
+
+    // ---------------------------
+    // 4. Animación simple
+    // ---------------------------
+    let angle = 0;
+
+    app.ticker.add(() => {
+        angle += 0.03;
+
+        // movimiento de abrir/cerrar
+        inf.y = (app.renderer.height / 2) + Math.sin(angle) * 20 + 50;
+    });
+
+});
+</script>
+
+</body>
+</html>
