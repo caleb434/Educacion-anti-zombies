@@ -3,39 +3,34 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
 <style>
-
   /* ===== CONFIGURACIÓN GENERAL ===== */
   html,body{
-    margin:0;          /* Quita bordes blancos */
-    height:100%;       /* Hace que ocupe toda la pantalla */
-    overflow:hidden;   /* Evita que aparezca scroll */
+    margin:0;
+    height:100%;
+    overflow:hidden;
   }
 
-  /* ===== IMAGEN DE FONDO (GARGANTA) ===== */
+  /* ===== FONDO: GARGANTA ===== */
   .garganta{
-    position:fixed;    /* Se queda fija en la pantalla */
-    inset:0;           /* La pega a todos los bordes */
+    position:fixed;
+    inset:0;
     background:center/cover no-repeat url("assets/images/garganta.png");
   }
 
-  /* ===== MANDÍBULA SUPERIOR ===== */
+  /* ===== MANDÍBULA SUPERIOR (SIN RECORTAR) ===== */
   .mandibulasuperior{
     position:fixed;
-    top:0px;       /* Mueve la imagen hacia abajo o arriba */
     left:0;
-    width:100vw;    /* Ancho completo */
-    height:230px;   /* Alto que tú elegiste */
-    object-fit:cover;/* ESTIRA la imagen */
-    object-position: bottom center;
-     transform:translateY(-60px);
+    width:100vw;     /* se ajusta al ancho de la pantalla */
+    height:auto;     /* mantiene toda la altura de la imagen */
+    top:-220px;      /* la sube para que solo se vea una parte */
     z-index:1;
     pointer-events:none;
   }
-
 </style>
 
-<!-- FONDO: GARGANTA -->
 <div class="garganta"></div>
 
-<!-- MANDÍBULA SUPERIOR -->
-<img class="mandibulasuperior" src="assets/images/mandibula superior.png" alt="">
+<img class="mandibulasuperior"
+     src="assets/images/mandibula superior.png"
+     alt="">
