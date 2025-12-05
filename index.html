@@ -1,11 +1,39 @@
 <!doctype html>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
 <style>
-  html,body{margin:0;height:100%;overflow:hidden}
-  .bg{position:fixed;inset:0;background:center/cover no-repeat url("assets/images/garganta.png");transform:translateZ(0)}
-  .ov{position:fixed;inset:0;margin:auto;width:min(85vw,900px);height:auto;z-index:1;pointer-events:none}
-  @media(orientation:portrait){.bg{background-position:50% 35%}}
+
+  /* ===== CONFIGURACIÓN GENERAL ===== */
+  html,body{
+    margin:0;          /* Quita bordes blancos */
+    height:100%;       /* Hace que ocupe toda la pantalla */
+    overflow:hidden;   /* Evita que aparezca scroll */
+  }
+
+  /* ===== IMAGEN DE FONDO (GARGANTA) ===== */
+  .bg{
+    position:fixed;    /* Se queda fija en la pantalla */
+    inset:0;           /* La pega a todos los bordes */
+    background:center/cover no-repeat url("assets/images/garganta.png");
+  }
+
+  /* ===== MANDÍBULA SUPERIOR ===== */
+  .ov{
+    position:fixed;           /* Se queda fija en la pantalla */
+    inset:0;                  /* Centra el elemento */
+    margin:auto;              /* Ayuda a centrarlo */
+    transform:translateY(-50px); /* SUBE la imagen */
+    width:min(110vw,1200px);  /* La hace más grande */
+    height:auto;              /* Mantiene proporción */
+    z-index:1;                /* La pone encima del fondo */
+    pointer-events:none;      /* Evita que interfiera con clics */
+  }
+
 </style>
-<div class="bg" aria-hidden="true"></div>
-<img class="ov" src="assets/images/mandibula%20superior.png" alt="">
+
+<!-- FONDO: GARGANTA -->
+<div class="bg"></div>
+
+<!-- MANDÍBULA SUPERIOR -->
+<img class="ov" src="assets/images/mandibula superior.png" alt="">
