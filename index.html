@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Educación anti zombies</title>
 
-    <!-- Favicon / Logo (SVG + fallbacks PNG). Rutas relativas para GitHub Pages. -->
+    <!-- Favicon / Logo -->
     <link rel="icon" href="./assets/images/logo.svg?v=3" type="image/svg+xml" sizes="any">
     <link rel="icon" href="./assets/images/ojos.png?v=3" type="image/png" sizes="32x32">
     <link rel="icon" href="./assets/images/ojos.png?v=3" type="image/png" sizes="16x16">
@@ -18,53 +18,20 @@
     <link rel="preload" as="image" href="assets/images/mandibulainferior.png" />
 
     <style>
-      :root{
-        /* Superior */
-        --sup-top: -24%;
-        --sup-left: 60%;
-        --sup-width: 107vw;
-        --sup-height: 760px;
-        --sup-tx: -6.7%;
-        --sup-ty: 0%;
-
-        /* Inferior */
-        --inf-top: 130%;
-        --inf-left: 60%;
-        --inf-width: 107vw;
-        --inf-height: 760px;
-        --inf-tx: -6.7%;
-        --inf-ty: 0%;
-      }
-
       html, body { height: 100%; margin: 0; }
-      body {
-        background: #000 url("assets/images/garganta.png") center / cover no-repeat fixed;
-      }
+      body { background: #000 url("assets/images/garganta.png") center / cover no-repeat fixed; }
 
+      /* Reglas comunes con variables por elemento */
       .overlay-image{
         position: fixed;
-        pointer-events: none; /* por qué: no bloquea la UI */
+        pointer-events: none;           /* no bloquea la UI */
         image-rendering: auto;
-      }
-
-      /* Inferior: plano base */
-      #mandibulaInferior{
-        z-index: 1;
-        top: var(--inf-top);
-        left: var(--inf-left);
-        width: var(--inf-width);
-        height: var(--inf-height);
-        transform: translate(calc(-50% + var(--inf-tx)), calc(-50% + var(--inf-ty)));
-      }
-
-      /* Superior: encima de la inferior */
-      #mandibulaSuperior{
-        z-index: 2;
-        top: var(--sup-top);
-        left: var(--sup-left);
-        width: var(--sup-width);
-        height: var(--sup-height);
-        transform: translate(calc(-50% + var(--sup-tx)), calc(-50% + var(--sup-ty)));
+        top: var(--top);
+        left: var(--left);
+        width: var(--w);
+        height: var(--h);
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)));
+        z-index: var(--z);
       }
     </style>
   </head>
@@ -74,6 +41,9 @@
       class="overlay-image"
       src="assets/images/mandibulainferior.png"
       alt="Mandíbula inferior"
+      style="
+        --z:1; --top:130%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;
+      "
       decoding="async"
       fetchpriority="high"
       onerror="this.onerror=null; this.src='assets/images/mandibula inferior.png';"
@@ -83,6 +53,9 @@
       class="overlay-image"
       src="assets/images/mandibulasuperior.png"
       alt="Mandíbula superior"
+      style="
+        --z:2; --top:-24%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;
+      "
       decoding="async"
       fetchpriority="high"
       onerror="this.onerror=null; this.src='assets/images/mandibula superior.png';"
