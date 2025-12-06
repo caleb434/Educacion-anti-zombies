@@ -1,288 +1,243 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Educación anti zombies</title>
-
     <link rel="icon" href="./assets/images/logo.svg?v=3" type="image/svg+xml" sizes="any">
     <link rel="icon" href="./assets/images/ojos.png?v=3" type="image/png" sizes="32x32">
     <link rel="icon" href="./assets/images/ojos.png?v=3" type="image/png" sizes="16x16">
     <meta name="theme-color" content="#111111" />
-
     <link rel="preload" as="image" href="assets/images/garganta.png" />
     <link rel="preload" as="image" href="assets/images/mandibulasuperior.png" />
     <link rel="preload" as="image" href="assets/images/mandibulainferior.png" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Kristen+ITC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kristen+ITC&display=swap" rel="stylesheet">
     <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        font-family: 'Kristen ITC', cursive, sans-serif;
-        overflow: hidden;
-      }
-      body {
-        background: #000 url("assets/images/garganta.png") center / cover no-repeat fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      
-      .login-container {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        background: #F7EFD7;
-        border: 3px solid #0B7064;
-        border-radius: 20px;
-        padding: 1.5rem;
-        width: 280px;
-        height: 200px;
-        box-shadow: 0 0 20px rgba(11, 112, 100, 0.5);
-        position: relative;
-        z-index: 100;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-      }
-      
-      .login-container.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      .welcome-text {
-        font-family: 'Kristen ITC', cursive, sans-serif;
-        color: #0B7064;
-        text-align: center;
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-      }
-      
-      .input-group {
-        position: relative;
-        margin-bottom: 1.5rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-      
-      .input-field {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #449088;
-        border-radius: 10px;
-        background: #F7EFD7;
-        font-size: 1rem;
-        font-family: 'Kristen ITC', cursive, sans-serif;
-        color: #333;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-      
-      .input-field:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(68, 144, 136, 0.3);
-      }
-      
-      .input-label {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        color: #449088;
-        background: #F7EFD7;
-        padding: 0 5px;
-        transition: all 0.3s ease;
-        pointer-events: none;
-        font-family: 'Kristen ITC', cursive, sans-serif;
-      }
-      
-      .input-field:focus + .input-label,
-      .input-field:not(:placeholder-shown) + .input-label {
-        top: 0;
-        font-size: 0.8rem;
-        color: #0B7064;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        pointer-events: none;
-      }
-      
-      .login-button {
-        width: 100%;
-        padding: 18px;
-        background: #449088;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 1.2rem;
-        font-weight: 600;
-        font-family: 'Kristen ITC', cursive, sans-serif;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        opacity: 0;
-        transform: scale(0.95);
-        box-shadow: 0 0 10px rgba(68, 144, 136, 0);
-        position: relative;
-        z-index: 150;
-      }
-      
-      .login-button.visible {
-        opacity: 1;
-        transform: scale(1);
-      }
-      
-      .login-button:hover {
-        background: #3a7d76;
-        box-shadow: 0 0 15px rgba(68, 144, 136, 0.7);
-      }
-      
-      .login-button:active {
-        transform: scale(0.98);
-      }
-
-      /* Reglas comunes con variables por elemento */
-      .overlay-image{
-        position: fixed;
-        pointer-events: none;           /* no bloquea la UI */
-        image-rendering: auto;
-        top: var(--top);
-        left: var(--left);
-        width: var(--w);
-        height: var(--h);
-        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)));
-        z-index: var(--z);
-      }
-      
-      .frenetic-animation {
-        animation: mandibulaFrenetica 0.5s forwards;
-      }
-      
-      @keyframes mandibulaSuperiorFrenetica {
-        0% {
-          transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)));
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            height: 100vh;
+            font-family: 'Kristen ITC', cursive, sans-serif;
+            background: #000 url("assets/images/garganta.png") center/cover no-repeat fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        100% {
-          transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) + 50px));
+        
+        .login-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+            background: #F7EFD7;
+            border: 3px solid #0B7064;
+            border-radius: 20px;
+            padding: 1.5rem;
+            width: 280px;
+            height: 240px;
+            box-shadow: 0 0 20px rgba(11, 112, 100, 0.5);
+            position: relative;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
-      }
-      
-      @keyframes mandibulaInferiorFrenetica {
-        0% {
-          transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)));
+        
+        .login-container.visible { opacity: 1; transform: translateY(0); }
+        
+        .welcome-text {
+            color: #0B7064;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        100% {
-          transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) - 50px));
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
-      }
-      
-      .frenetic-animation#mandibulaSuperior {
-        animation-name: mandibulaSuperiorFrenetica;
-      }
-      
-      .frenetic-animation#mandibulaInferior {
-        animation-name: mandibulaInferiorFrenetica;
-      }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #449088;
+            border-radius: 10px;
+            background: #F7EFD7;
+            font-size: 1rem;
+            font-family: 'Kristen ITC', cursive, sans-serif;
+            color: #333;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(68, 144, 136, 0.3);
+        }
+        
+        .input-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #449088;
+            background: #F7EFD7;
+            padding: 0 5px;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-family: 'Kristen ITC', cursive, sans-serif;
+        }
+        
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: 0;
+            font-size: 0.8rem;
+            color: #0B7064;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 18px;
+            background: #449088;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-family: 'Kristen ITC', cursive, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.95);
+            box-shadow: 0 0 10px rgba(68, 144, 136, 0);
+            position: relative;
+            z-index: 150;
+        }
+        
+        .login-button.visible { opacity: 1; transform: scale(1); }
+        
+        .login-button:hover { 
+            background: #3a7d76;
+            box-shadow: 0 0 15px rgba(68, 144, 136, 0.7);
+        }
+        
+        .login-button:active { transform: scale(0.98); }
+        
+        .overlay-image{
+            position: fixed;
+            pointer-events: none;
+            image-rendering: auto;
+            top: var(--top);
+            left: var(--left);
+            width: var(--w);
+            height: var(--h);
+            transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)));
+            z-index: var(--z);
+        }
+        
+        .frenetic-animation {
+            animation: mandibulaMove 1s ease-in-out forwards;
+        }
+        
+        @keyframes mandibulaSuperiorMove {
+            0% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))); }
+            40% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) - 40px)); }
+            100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) + 150px)); }
+        }
+        
+        @keyframes mandibulaInferiorMove {
+            0% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))); }
+            40% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) + 40px)); }
+            100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) - 150px)); }
+        }
+        
+        .frenetic-animation#mandibulaSuperior { animation-name: mandibulaSuperiorMove; }
+        .frenetic-animation#mandibulaInferior { animation-name: mandibulaInferiorMove; }
     </style>
-  </head>
-  <body>
-    <div class="login-container" id="loginContainer">
-      <h1 class="welcome-text">¡Bienvenido!</h1>
-      <div class="input-group">
-        <input type="text" id="username" class="input-field" placeholder=" ">
-        <label for="username" class="input-label">Usuario</label>
-      </div>
-      <div class="input-group">
-        <input type="password" id="password" class="input-field" placeholder=" ">
-        <label for="password" class="input-label">Contraseña</label>
-      </div>
-      <button class="login-button" id="loginButton" disabled>Aceptar</button>
-    </div>
-    <img
-      id="mandibulaInferior"
-      class="overlay-image"
-      src="assets/images/mandibulainferior.png"
-      alt="Mandíbula inferior"
-      style="
-        --z:1; --top:130%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;
-      "
-      decoding="async"
-      fetchpriority="high"
-      onerror="this.onerror=null; this.src='assets/images/mandibula inferior.png';"
-    />
-    <img
-      id="mandibulaSuperior"
-      class="overlay-image"
-      src="assets/images/mandibulasuperior.png"
-      alt="Mandíbula superior"
-      style="
-        --z:2; --top:-24%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;
-      "
-      decoding="async"
-      fetchpriority="high"
-      onerror="this.onerror=null; this.src='assets/images/mandibula superior.png';"
-    />
+</head>
+<body>
+    <main class="login-container" id="loginContainer">
+        <h1 class="welcome-text">¡Bienvenido!</h1>
+        <section class="inputs-section">
+            <div class="input-group">
+                <input type="text" id="username" class="input-field" placeholder=" ">
+                <label for="username" class="input-label">Usuario</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" class="input-field" placeholder=" ">
+                <label for="password" class="input-label">Contraseña</label>
+            </div>
+        </section>
+        <button class="login-button" id="loginButton" disabled>Aceptar</button>
+    </main>
+    
+    <img id="mandibulaInferior" class="overlay-image" src="assets/images/mandibulainferior.png" 
+         alt="Mandíbula inferior" style="--z:1; --top:130%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;" 
+         decoding="async" fetchpriority="high" onerror="this.src='assets/images/mandibula inferior.png';" />
+    
+    <img id="mandibulaSuperior" class="overlay-image" src="assets/images/mandibulasuperior.png" 
+         alt="Mandíbula superior" style="--z:2; --top:-24%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;" 
+         decoding="async" fetchpriority="high" onerror="this.src='assets/images/mandibula superior.png';" />
+    
     <script>
-      // Show login container with animation after page loads
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-          document.getElementById('loginContainer').classList.add('visible');
-        }, 300);
-        
-        // Check if both fields are filled to show the button
-        const username = document.getElementById('username');
-        const password = document.getElementById('password');
-        const loginButton = document.getElementById('loginButton');
-        const loginContainer = document.getElementById('loginContainer');
-        const mandibulaInferior = document.getElementById('mandibulaInferior');
-        const mandibulaSuperior = document.getElementById('mandibulaSuperior');
-        
-        function checkFields() {
-          if (username.value.trim() !== '' && password.value.trim() !== '') {
-            loginButton.disabled = false;
-            setTimeout(() => {
-              loginButton.classList.add('visible');
-            }, 50);
-          } else {
-            loginButton.disabled = true;
-            loginButton.classList.remove('visible');
-          }
-        }
-        
-        // Clear password when clicking outside the login container
-        document.addEventListener('click', (e) => {
-          if (!loginContainer.contains(e.target)) {
-            password.value = '';
-            checkFields();
-          }
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = {
+                loginContainer: document.getElementById('loginContainer'),
+                username: document.getElementById('username'),
+                password: document.getElementById('password'),
+                loginButton: document.getElementById('loginButton'),
+                mandibulaInferior: document.getElementById('mandibulaInferior'),
+                mandibulaSuperior: document.getElementById('mandibulaSuperior')
+            };
+            
+            // Animación de entrada
+            setTimeout(() => elements.loginContainer.classList.add('visible'), 300);
+            
+            // Validación de campos
+            function checkFields() {
+                const isValid = elements.username.value.trim() && elements.password.value.trim();
+                elements.loginButton.disabled = !isValid;
+                elements.loginButton.classList.toggle('visible', isValid);
+            }
+            
+            // Limpiar contraseña al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!elements.loginContainer.contains(e.target)) {
+                    elements.password.value = '';
+                    checkFields();
+                }
+            });
+            
+            // Animación de mandíbulas al presionar aceptar
+            elements.loginButton.addEventListener('click', () => {
+                elements.mandibulaInferior.style.setProperty('--z', '200');
+                elements.mandibulaSuperior.style.setProperty('--z', '201');
+                
+                [elements.mandibulaInferior, elements.mandibulaSuperior].forEach(img => {
+                    img.classList.add('frenetic-animation');
+                });
+                
+                setTimeout(() => {
+                    [elements.mandibulaInferior, elements.mandibulaSuperior].forEach(img => {
+                        img.classList.remove('frenetic-animation');
+                    });
+                    elements.mandibulaInferior.style.setProperty('--z', '1');
+                    elements.mandibulaSuperior.style.setProperty('--z', '2');
+                }, 3000);
+            });
+            
+            // Event listeners
+            elements.username.addEventListener('input', checkFields);
+            elements.password.addEventListener('input', checkFields);
         });
-        
-        // Animate mandibles when accept button is clicked
-        loginButton.addEventListener('click', () => {
-          // Change z-index to bring mandibles to front
-          mandibulaInferior.style.setProperty('--z', '200');
-          mandibulaSuperior.style.setProperty('--z', '201');
-          
-          // Add animation class
-          mandibulaInferior.classList.add('frenetic-animation');
-          mandibulaSuperior.classList.add('frenetic-animation');
-          
-          // Remove animation after 3 seconds
-          setTimeout(() => {
-            mandibulaInferior.classList.remove('frenetic-animation');
-            mandibulaSuperior.classList.remove('frenetic-animation');
-            // Reset z-index
-            mandibulaInferior.style.setProperty('--z', '1');
-            mandibulaSuperior.style.setProperty('--z', '2');
-          }, 3000);
-        });
-        
-        username.addEventListener('input', checkFields);
-        password.addEventListener('input', checkFields);
-      });
     </script>
-  </body>
+</body>
 </html>
