@@ -68,8 +68,7 @@
             border: 2px solid #449088;
             border-radius: 10px;
             background: #F7EFD7;
-            font-size: 1rem;
-            font-family: 'Kristen ITC', cursive, sans-serif;
+            font: 1rem 'Kristen ITC', cursive, sans-serif;
             color: #333;
             text-align: center;
             transition: all 0.3s ease;
@@ -110,9 +109,7 @@
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            font-family: 'Kristen ITC', cursive, sans-serif;
+            font: 600 1.2rem 'Kristen ITC', cursive, sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
             opacity: 0;
@@ -141,6 +138,43 @@
             height: var(--h);
             transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)));
             z-index: var(--z);
+        }
+        
+        .mode-box {
+            position: absolute;
+            background: #F7EFD7;
+            border: 3px solid #0B7064;
+            border-radius: 15px;
+            padding: 1rem;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s ease-in-out;
+            pointer-events: none;
+            z-index: 300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Kristen ITC', cursive, sans-serif;
+            font-weight: 600;
+            color: #0B7064;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(11, 112, 100, 0.3);
+        }
+        
+        .mode-box.visible {
+            opacity: 1;
+            transform: scale(1);
+            box-shadow: 0 0 35px rgba(11, 112, 100, 0.5);
+        }
+        
+        .mode-box.history {
+            background: #E8E4D7;
+            border-color: #0B7064;
+            box-shadow: 0 0 15px rgba(11, 112, 100, 0.2);
+        }
+        
+        .mode-box.history.visible {
+            box-shadow: 0 0 25px rgba(11, 112, 100, 0.3);
         }
         
         .frenetic-animation {
@@ -179,6 +213,18 @@
         <button class="login-button" id="loginButton" disabled>Aceptar</button>
     </main>
     
+    <div class="mode-box" id="classMode" style="width: 200px; height: 80px; top: 50%; left: 10%;">
+        Modo Clase
+    </div>
+    
+    <div class="mode-box" id="practiceMode" style="width: 200px; height: 80px; top: 50%; left: 70%;">
+        Modo Práctica
+    </div>
+    
+    <div class="mode-box history" id="historyMode" style="width: 200px; height: 80px; top: 15%; left: 50%;">
+        Modo Historia
+    </div>
+    
     <img id="mandibulaInferior" class="overlay-image" src="assets/images/mandibulainferior.png" 
          alt="Mandíbula inferior" style="--z:1; --top:130%; --left:60%; --w:107vw; --h:760px; --tx:-6.7%; --ty:0%;" 
          decoding="async" fetchpriority="high" onerror="this.src='assets/images/mandibula inferior.png';" />
@@ -189,54 +235,60 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const elements = {
+            const el = {
                 loginContainer: document.getElementById('loginContainer'),
                 username: document.getElementById('username'),
                 password: document.getElementById('password'),
                 loginButton: document.getElementById('loginButton'),
                 mandibulaInferior: document.getElementById('mandibulaInferior'),
-                mandibulaSuperior: document.getElementById('mandibulaSuperior')
+                mandibulaSuperior: document.getElementById('mandibulaSuperior'),
+                classMode: document.getElementById('classMode'),
+                practiceMode: document.getElementById('practiceMode'),
+                historyMode: document.getElementById('historyMode')
             };
             
-            // Animación de entrada
-            setTimeout(() => elements.loginContainer.classList.add('visible'), 300);
+            setTimeout(() => el.loginContainer.classList.add('visible'), 300);
             
-            // Validación de campos
-            function checkFields() {
-                const isValid = elements.username.value.trim() && elements.password.value.trim();
-                elements.loginButton.disabled = !isValid;
-                elements.loginButton.classList.toggle('visible', isValid);
-            }
+            const checkFields = () => {
+                const isValid = el.username.value.trim() && el.password.value.trim();
+                el.loginButton.disabled = !isValid;
+                el.loginButton.classList.toggle('visible', isValid);
+            };
             
-            // Limpiar contraseña al hacer clic fuera
             document.addEventListener('click', (e) => {
-                if (!elements.loginContainer.contains(e.target)) {
-                    elements.password.value = '';
+                if (!el.loginContainer.contains(e.target)) {
+                    el.password.value = '';
                     checkFields();
                 }
             });
             
-            // Animación de mandíbulas al presionar aceptar
-            elements.loginButton.addEventListener('click', () => {
-                elements.mandibulaInferior.style.setProperty('--z', '200');
-                elements.mandibulaSuperior.style.setProperty('--z', '201');
+            el.loginButton.addEventListener('click', () => {
+                el.mandibulaInferior.style.setProperty('--z', '200');
+                el.mandibulaSuperior.style.setProperty('--z', '201');
                 
-                [elements.mandibulaInferior, elements.mandibulaSuperior].forEach(img => {
+                [el.mandibulaInferior, el.mandibulaSuperior].forEach(img => {
                     img.classList.add('frenetic-animation');
                 });
                 
                 setTimeout(() => {
-                    [elements.mandibulaInferior, elements.mandibulaSuperior].forEach(img => {
-                        img.classList.remove('frenetic-animation');
+                    [el.mandibulaInferior, el.mandibulaSuperior].forEach(img => {
+                        img.style.transform = img.id === 'mandibulaInferior' ? `translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) - 150px))` : `translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) + 150px))`;
                     });
-                    elements.mandibulaInferior.style.setProperty('--z', '1');
-                    elements.mandibulaSuperior.style.setProperty('--z', '2');
-                }, 3000);
+                    
+                    el.username.disabled = true;
+                    el.password.disabled = true;
+                    el.loginButton.disabled = true;
+                }, 1000);
+                
+                setTimeout(() => {
+                    el.classMode.classList.add('visible');
+                    el.practiceMode.classList.add('visible');
+                    el.historyMode.classList.add('visible');
+                }, 2000);
             });
             
-            // Event listeners
-            elements.username.addEventListener('input', checkFields);
-            elements.password.addEventListener('input', checkFields);
+            el.username.addEventListener('input', checkFields);
+            el.password.addEventListener('input', checkFields);
         });
     </script>
 </body>
